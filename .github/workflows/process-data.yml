@@ -1,0 +1,25 @@
+name: Process MyDatas File
+
+on:
+  push:
+    paths:
+      - MyDatas.txt
+  workflow_dispatch:
+
+jobs:
+  process_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print file content
+        run: |
+          echo "Content of MyDatas.txt:"
+          cat MyDatas.txt
+
+      - name: Convert to uppercase (example modification)
+        run: |
+          awk '{ print toupper($0) }' MyDatas.txt > Processed_MyDatas.txt
+          echo "File processed: Processed_MyDatas.txt"
